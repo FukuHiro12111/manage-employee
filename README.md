@@ -13,11 +13,24 @@ Docker で環境構築をし、CRUD 機能を備えた Web App
 ## 環境構築
 
 ```bash
-# コンテナをデタッチモード(バックグラウンド)で起動
+# イメージをビルドし、デタッチモード(バックグラウンド)で起動
 $ docker-compose up -d --build
 
+
+# コンテナ、ネットワークの削除
+$ docker-compose down
 # コンテナ、ネットワーク、イメージの削除
 $ docker-compose down --rmi all
+```
+
+## unittest
+
+```bash
+# testsフォルダ以下をすべて実行
+$ python -m unittest discover tests
+
+# 特定の関数のみを実行
+$ python -m unittest tests.test_.test_member.test_db_is_working
 ```
 
 ## 初期画面

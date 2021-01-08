@@ -5,13 +5,14 @@ services:
     build:
       context: jupyternotebook
       dockerfile: ./Dockerfile
+    command: python server.py
     ports:
       - 0.0.0.0:8888:8888
       - 0.0.0.0:3000:3000
     links:
       - mysql:mysql
     volumes:
-      - $PWD/employee-manager:/root/app
+      - $PWD/app:/root/app
     working_dir: /root/app
     restart: unless-stopped # 最後の状態が終了ステータスだったら再起動しない
     networks:

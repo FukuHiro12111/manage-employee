@@ -2,7 +2,7 @@
 # Dockerfile for OOP2 lectur  #
 ###############################
 FROM python:3.7.4
-LABEL "FukuHiro" <fukuhiro@gmail.com>
+LABEL fukuhiro@gmail.com "FukuHiro"
 
 RUN pip3 install \
         numpy \
