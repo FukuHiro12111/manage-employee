@@ -1,0 +1,121 @@
+<!--{% extends "_signedin_base.html" %}-->
+{% block title %}member({{ mode }}){% end %}
+{% block content %}
+<div class="member member-form">
+    <main role="main" class="container">
+        {% if len(messages) > 0 %}
+        <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+            <p class="mb-0">{{ escape(message) }}</p>
+            {% end %}
+        </div>
+        {% end %}
+        {% if len(errors) > 0 %}
+        <div class="alert alert-danger" role="alert">
+            {% for err in errors %}
+            <p class="mb-0">{{ escape(err) }}</p>
+            {% end %}
+        </div>
+        {% end %}
+        {% if mode == "new" %}
+        <form method="POST">
+            <div class="card">
+                <h5 class="card-header d-flex justify-content-between align-items-center">
+                    従業員リスト - 新規登録
+                </h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="form-name">名前</label>
+                            <input type="text" class="form-control form-control-lg" name="form-name" id="form-name" required value="{{ member.attr['name'] if member.attr['name'] is not None else '' }}">
+                            <small class="form-text text-muted">苗字と名前の間に半角スペースを入れてください。</small>
+                        </div>
+                        <div class="form-group col-6 invisible"><!-- 対象データIDは新規登録時未発行なため非表示項目 -->
+                            <label for="form-member_id">対象データID</label>
+                            <input type="number" class="form-control" name="form-member_id" id="form-member_id">
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="form-birthday">生年月日</label>
+                        <input type="date" class="form-control" name="form-birthday" id="form-birthday" required value="{{ str(member.attr['birthday']) if member.attr['birthday'] is not None else '' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-gender">性別</label>
+                        <input type="text" class="form-control form-control-ge" name="form-gender" id="form-gender" required value="{{ member.attr['gender'] if member.attr['gender'] is not None else '' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-position">役職</label>
+                        <input type="text" class="form-control form-control-po" name="form-position" id="form-position" required value="{{ member.attr['position'] if member.attr['position'] is not None else '' }}">
+                        <small class="form-text text-muted">スタッフ、アルバイト、店長など。</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-detail">備考</label>
+                        <textarea class="form-control form-control-sm" name="form-detail" id="form-detail" rows="4">{{ member.attr['detail'] if member.attr['detail'] is not None else ''}}</textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="form-money">時給</label>
+                            <input type="number" class="form-control" name="form-money" id="form-money" value="{{ str(member.attr['money']) }}" min="0" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="/members" class="btn btn-light" tabindex="-1">一覧へ戻る</a>
+                    <button type="submit" class="btn btn-primary">新規登録</button>
+                </div>
+            </div>
+        </form>
+        {% elif mode == "show" %}
+        <form method="POST">
+        <div class="card">
+            <h5 class="card-header d-flex justify-content-between align-items-center">
+                従業員データ - 詳細
+<!--追加箇所--> <button type="submit" class="btn btn-primary">更新</button>
+            </h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="form-name">名前</label>
+                            <input type="text" class="form-control form-control-lg" name="form-name" id="form-name" readonly value="{{ member.attr['name'] if member.attr['name'] is not None else '' }}">
+                            <small class="form-text text-muted">苗字と名前の間に半角スペースを入れてください。</small>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="form-member_id">従業員ID</label>
+                            <input type="number" class="form-control id" name="form-member_id" id="form-member_id" value="{{ str(member.attr['member_id']) }}" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="form-birthday">生年月日</label>
+                        <input type="date" class="form-control" name="form-birthday" id="form-birthday" readonly value="{{ str(member.attr['birthday']) if member.attr['birthday'] is not None else '' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-gender">性別</label>
+                        <input type="text" class="form-control form-control-ge" name="form-gender" id="form-gender" readonly value="{{ member.attr['gender'] if member.attr['gender'] is not None else '' }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-position">役職</label>
+                        <input type="text" class="form-control form-control-po" name="form-position" id="form-position" readonly value="{{ member.attr['position'] if member.attr['position'] is not None else '' }}">
+                        <small class="form-text text-muted">スタッフ、アルバイト、店長など。</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-detail">備考</label>
+                        <textarea class="form-control form-control-sm" name="form-detail" id="form-detail" rows="4">{{ member.attr['detail'] if member.attr['detail'] is not None else ''}}</textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="form-money">時給</label>
+                            <input type="number" class="form-control" name="form-money" id="form-money" value="{{ str(member.attr['money']) }}" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between align-items-center">
+                <a href="/members" class="btn btn-light" tabindex="-1">一覧へ戻る</a>
+<!--追加箇所-->  <a href="/member/delete/{{member.attr['member_id']}}" class="btn btn-primary" tabindex="-1">削除</a>
+            </div>
+        </div>
+        </form>
+        {% end %}
+    </main>
+</div>
+{% end %}

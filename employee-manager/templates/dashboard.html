@@ -1,0 +1,21 @@
+<!--{% extends "_signedin_base.html" %}-->
+{% block title %}Dashboard{% end %}
+{% block content %}
+<div class="dashboard container-fluid">
+    <div class="row">
+        <div class="col-md">
+            <div class="card">
+                <h5 class="card-header">従業員管理メニュー</h5>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="/members">従業員 一覧</a></li>
+                        <li><a href="/member/new">従業員 新規登録</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md"></div>
+        <div class="col-md"></div>
+    </div>
+</div>
+{% end %}
