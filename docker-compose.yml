@@ -5,7 +5,7 @@ services:
     build:
       context: jupyternotebook
       dockerfile: ./Dockerfile
-    command: python server.py
+    # command: python server.py
     ports:
       - 0.0.0.0:8888:8888
       - 0.0.0.0:3000:3000

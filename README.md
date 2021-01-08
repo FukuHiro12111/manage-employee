@@ -12,10 +12,19 @@ Docker で環境構築をし、CRUD 機能を備えた Web App
 
 ## 環境構築
 
-```bash
+```
 # イメージをビルドし、デタッチモード(バックグラウンド)で起動
 $ docker-compose up -d --build
 
+localhost:8888からjupyternotebookのターミナルを立ち上げる
+
+# データベース作成
+$ python3 server.py migrate
+
+# 実行
+$ python3 server.py
+
+localhost:3000で表示
 
 # コンテナ、ネットワークの削除
 $ docker-compose down
@@ -25,7 +34,7 @@ $ docker-compose down --rmi all
 
 ## unittest
 
-```bash
+```
 # testsフォルダ以下をすべて実行
 $ python -m unittest discover tests
 
