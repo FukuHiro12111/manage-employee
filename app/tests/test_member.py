@@ -39,11 +39,11 @@ class test_member(unittest.TestCase):
     
         
     def test_db_is_working(self):
-        lm = member.find(self.lm.attr["member_id"])
+        d_lm = member.find(self.lm.attr["member_id"])
         # findで帰ってきているのがmember_idならDBに保存されている
-        self.assertTrue(type(lm) is member)
+        self.assertTrue(type(d_lm) is member)
         # 最初のmemberなのでmember_idは1になる
-        self.assertTrue(lm.attr["member_id"] == 1)
+        self.assertTrue(d_lm.attr["member_id"] == 1)
         
     
 
@@ -90,8 +90,8 @@ class test_member(unittest.TestCase):
     # default値を持ったmemberインスタンスを生成する
     # Controlerで入力フォームを作るのにも利用する
     def test_build(self):
-        lm = member.build()
-        self.assertTrue(type(lm) is member)
+        b_lm = member.build()
+        self.assertTrue(type(b_lm) is member)
 
     # save関数のテストを行う
     # 正例だけ出なく負例もテストするとなお良い
@@ -111,8 +111,8 @@ class test_member(unittest.TestCase):
         self.assertTrue(lm_id == 2)
 
     def test__index(self):
-        self.assertEqual(len(member._index(2)), 1)
-        self.assertEqual(member._index(2)[0], 1)
+        self.assertEqual(len(member._index(1)), 1)
+        self.assertEqual(member._index(1)[0], 1)
 
 if __name__ == '__main__':
     # unittestを実行
